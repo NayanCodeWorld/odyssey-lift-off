@@ -2,8 +2,8 @@ const gql = require('graphql-tag');
 
 const typeDefs = gql`
 type Query{
-    "Get tracks array for homepage grid"
     tracksForHome: [Track!]!
+    track(id: ID!): Track
 }
 
 "A track is a group of Modules that teaches about a specific topic"
@@ -14,6 +14,16 @@ type Track{
     thumbnail: String
     length: Int
     modulesCount: Int
+    description: String
+    numberOfViews: Int
+    modules: [Module]
+}
+
+"A Module is a single unit of teaching. Multiple modules compose a Track"
+type Module{
+    id: ID!
+    title: String!
+    length: Int
 }
 
 "Author of a complete Track or a Module"
@@ -26,3 +36,5 @@ type Author{
 `;
 
 module.exports = typeDefs;
+
+//Query :- A request for specific data from a GraphQL server. Clients define the structure of the response, enabling precise and efficient data retrieval.
